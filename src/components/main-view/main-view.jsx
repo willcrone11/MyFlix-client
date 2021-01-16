@@ -2,7 +2,9 @@ import React from 'react';
 //used to send client requests; hooks frontend code up with API
 import axios from 'axios';
 
-class MainView extends React.Component {
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+
   constructor() {
     // Call the superclass constructor so React can initialize it
     super();
