@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Card, Button } from 'react-bootstrap';
+
 export class MovieView extends React.Component {
 
   constructor() {
@@ -16,27 +18,30 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <img className="movie-poster" src={movie.ImagePath} />
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-        </div>
-        </div>
-
-
+        <Card style={{ width: '18rem' }}>
+          <Card.Img className="movie-poster" src={movie.ImagePath} />
+          <Card.Body>
+            <div className="movie-title">
+              <Card.Title>Title: {movie.Title}</Card.Title>
+            </div>
+            <Card.Text>
+              <span className="label">Description: </span>
+              <span className="value">{movie.Description}</span>
+            </Card.Text>
+            <Card.Text>
+              <span className="label">Genre: </span>
+              <span className="value">{movie.Genre.Name}</span>
+            </Card.Text>
+            <Card.Text>
+              <span className="label">Director: </span>
+              <span className="value">{movie.Director.Name}</span>
+            </Card.Text>
+            <Button onClick={() => onClick()} variant='primary'>
+              Back
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
     );
   }
 }
