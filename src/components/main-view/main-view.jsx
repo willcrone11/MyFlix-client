@@ -17,10 +17,10 @@ export class MainView extends React.Component {
     // Call the superclass constructor so React can initialize it
     super();
 
-    // Initialize the state to an empty object so we can destructure it later
+    // Initial state set to null
     this.state = {
       movies: null,
-      selectedMovie: null
+      selectedMovie: null,
       user: null,
       register: null
     };
@@ -40,6 +40,7 @@ export class MainView extends React.Component {
       });
   }
 
+  //When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` property to that movie
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
