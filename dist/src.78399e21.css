@@ -1,3 +1,27 @@
+.main-view {
+  max-height: 200px;
+}
+.movie-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 300px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.form-login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-register {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .my-flix {
   color: steelblue;
 }
