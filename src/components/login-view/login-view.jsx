@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import './login-view.scss';
 
@@ -11,10 +13,19 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
-    };
+    /* Send a request to the server for authentication */
+    axios.post('https://starwarscentral.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+    .then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    })
+    .catch(e => {
+      console.log('no such user')
+    });
+  };
 
   return (
     <React.Fragment>
@@ -44,6 +55,12 @@ export function LoginView(props) {
           Submit
         </Button>
       </Form>
+      <div className="no-account">
+        <span>Don't Have an Account?</span>
+          <Link to={`/register`}>
+            <Button variant="link">Register Here</Button>
+          </Link>
+      </div>
     </React.Fragment>
   );
 }
