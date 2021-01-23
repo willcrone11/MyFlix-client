@@ -12,168 +12,167 @@ import './profile-view.scss';
 
 export class ProfileView extends React.Component {
 
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            username: null,
-            password: null,
-            email: null,
-            birthday: null,
-            FavoriteMovies: [],
-            movies: []
-        };
-    }
+      this.state = {
+        username: null,
+        password: null,
+        email: null,
+        birthday: null,
+        FavoriteMovies: [],
+        movies: []
+      };
+  }
 
-    componentDidMount() {
-        const accessToken = localStorage.getItem('token');
-        this.getUser(accessToken)
-    }
+  componentDidMount() {
+    const accessToken = localStorage.getItem('token');
+    this.getUser(accessToken)
+  }
 
-    getUser(token) {
-        const userName = localStorage.getItem('user');
-        axios.get(`https://starwarscentral.herokuapp.com/users/${userName}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(response => {
-                this.setState({
-                    username: response.data.username,
-                    password: response.data.password,
-                    email: response.data.email,
-                    birthday: response.data.birthday,
+  getUser(token) {
+    const userName = localStorage.getItem('user');
+    axios.get(`https://starwarscentral.herokuapp.com/users/${userName}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          username: response.data.Username,
+                    password: response.data.Password,
+                    email: response.data.Email,
+                    birthday: response.data.Birthday,
                     FavoriteMovies: response.data.FavoriteMovies
-                });
-            })
-            .catch(function (error) {
-                console.log(error)
-            });
-    }
+        });
+      })
+      .catch(function (error) {
+        console.log(error)
+      });
+  }
 
-    logOut() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.open('/', '_self');
-    }
+  logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.open('/', '_self');
+  }
 
-    deregisterUser() {
-        const token = localStorage.getItem('token');
-        const userName = localStorage.getItem('user');
+  deregisterUser() {
+    const token = localStorage.getItem('token');
+    const userName = localStorage.getItem('user');
 
-        if (confirm('Please confirm that you want to delete your profile.')) {
-            return (
-            axios.delete(`https://starwarscentral.herokuapp.com/users/${userName}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-                .then((response) => {
-                    console.log(response);
-                    alert('You have been deleted from the registry.');
-                    this.logOut();
-                })
-            )
-        }
-    }
-
-    deleteFaveMovie(movie) {
-        const token = localStorage.getItem('token');
-        const userName = localStorage.getItem('user');
-
-        axios.delete(`https://starwarscentral.herokuapp.com/users/${userName}/movies/${movie._id}`, {
-            headers: { Authorization: `Bearer ${token}` }
+    if (confirm('Please confirm that you want to delete your profile.')) {
+      return (
+        axios.delete(`https://starwarscentral.herokuapp.com/users/${userName}`, {
+          headers: { Authorization: `Bearer ${token}` }
         })
-            .then((response) => {
-                console.log(response);
-                alert('The movie has been removed from your Favorites.');
-                this.componentDidMount();
-            });
+        .then((response) => {
+          console.log(response);
+          alert('You have been deleted from the registry.');
+          this.logOut();
+        })
+      )
     }
+  }
 
-    render() {
+  deleteFaveMovie(movie) {
+    const token = localStorage.getItem('token');
+    const userName = localStorage.getItem('user');
 
-        const { movies } = this.props;
-        const userMovies = this.state.FavoriteMovies;
-        const FaveMovies = movies.filter(movie => userMovies.includes(movie._id));
-        const userName = localStorage.getItem('user');
+    axios.delete(`https://starwarscentral.herokuapp.com/users/${userName}/movies/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then((response) => {
+      console.log(response);
+      alert('The movie has been removed from your Favorites.');
+      this.componentDidMount();
+    });
+  }
 
-        return (
+  render() {
 
-        <Container className="profile-view">
-            <Row className='profile-row'>
+  const { movies } = this.props;
+  const userMovies = this.state.FavoriteMovies;
+  const FaveMovies = movies.filter(movie => userMovies.includes(movie._id));
 
-                    <h2>User Information</h2>
+    return (
 
-                    <Card className='profileCard'>
+      <Container className="profile-view">
+        <Row className='profile-row'>
 
-                        <Card.Body className='profile-card'>
+          <h2>User Information</h2>
 
-                            <Card.Text>
-                                <span className="label">Username: </span>
-                                    {userName}
-                                    <br/>
-                                <span className="label">Email: </span>
-                                    {this.state.email}
-                                    <br />
-                                <span className='label'>Birthday: </span>
-                                    {this.state.birthday}
-                            </Card.Text>
+          <Card className='profileCard'>
 
-                        </Card.Body>
+            <Card.Body className='profile-card'>
 
-                    </Card>
+              <Card.Text>
+                <span className="label">Username: </span>
+                  {this.state.username}
+                <br/>
+                <span className="label">Email: </span>
+                  {this.state.email}
+                <br />
+                <span className='label'>Birthday: </span>
+                  {this.state.birthday}
+              </Card.Text>
 
-                    <div>
-                        <Link to='/users/:username/update'>
-                            <Button variant='success' className='update-button'>Update Profile</Button>
-                        </Link>
+            </Card.Body>
 
-                        <Button variant='danger' onClick={() => this.deregisterUser()} className='delete-user-button'>Delete Profile</Button>
+          </Card>
 
-                        <Link to='/'>
-                            <Button variant='light' className='home-button'>Home</Button>
-                        </Link>
-                    </div>
-            </Row>
+          <div>
+            <Link to='/users/:username/update'>
+              <Button variant='success' className='update-button'>Update Profile</Button>
+            </Link>
 
-            <Row className='faveMovies'>
+            <Button variant='danger' onClick={() => this.deregisterUser()} className='delete-user-button'>Delete Profile</Button>
 
-                    <h2>Favorite Movies</h2>
+            <Link to='/'>
+              <Button variant='light' className='home-button'>Home</Button>
+            </Link>
+          </div>
+        </Row>
 
-                    <div className='faveMovies-container row'>
-                    {FaveMovies.map(movie => {
-                        return (
+        <Row className='faveMovies'>
 
-                        <Card key={movie._id} border='dark' className='faveMovies_card'>
+          <h2>Favorite Movies</h2>
 
-                            <Card.Img variant='top' src={movie.ImagePath} />
-                            <Card.Header>
-                                <Card.Body>
-                                    <Card.Title as='h1'>{movie.Title}</Card.Title>
-                                </Card.Body>
-                            </Card.Header>
+          <div className='faveMovies-container row'>
+            {FaveMovies.map(movie => {
+              return (
 
-                            <Link to={`/movies/${movie._id}`}>
-                                <Button variant='info' className='card-button profile-details-btn'>Details</Button>
-                            </Link>
+                <Card key={movie._id} border='dark' className='faveMovies_card'>
 
-                            <Button variant='secondary' onClick={() => this.deleteFaveMovie(movie)}>Remove Movie</Button>
+                  <Card.Img variant='top' src={movie.ImagePath} />
+                  <Card.Header>
+                    <Card.Body>
+                      <Card.Title as='h3'>{movie.Title}</Card.Title>
+                    </Card.Body>
+                  </Card.Header>
 
-                        </Card>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button variant='primary' className='card-button profile-details-btn'>Details</Button>
+                  </Link>
 
-                        )
-                    })}
-                </div>
-            </Row>
+                  <Button variant='danger' onClick={() => this.deleteFaveMovie(movie)}>Remove Movie</Button>
 
-        </Container>
+                </Card>
+
+              )
+            })}
+          </div>
+        </Row>
+
+      </Container>
     );
-}
+  }
 }
 
 ProfileView.propTypes = {
   user: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      birthday: PropTypes.instanceOf(Date).isRequired,
-      FavoriteMovies: PropTypes.array
-      })
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    birthday: PropTypes.instanceOf(Date).isRequired,
+    FavoriteMovies: PropTypes.array
+    })
 };
