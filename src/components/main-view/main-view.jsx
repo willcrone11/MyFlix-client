@@ -1,15 +1,20 @@
 import React from 'react';
 //used to send client requests; hooks frontend code up with API
 import axios from 'axios';
-import { Row, Col} from 'react-bootstrap';
+import { Row, Col, Button} from 'react-bootstrap';
 
 import './main-view.scss';
 
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
+import { UpdateProfile } from '../profile-edit-view/profile-edit-view';
 import { NavView } from '../nav-view/nav-view';
 
 export class MainView extends React.Component {
@@ -20,39 +25,32 @@ export class MainView extends React.Component {
 
     // Initial state set to null
     this.state = {
-      movies: null,
-      selectedMovie: null,
-      user: null,
-      register: null
+      movies: [],
+      user: null
     };
   }
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('https://starwarscentral.herokuapp.com/movies')
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
-  }
-
-  //When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` property to that movie
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
+      this.getMovies(accessToken);
+    }
   }
 
   //When a user successfully logs in, this function updates the `user` property in state to that particular user
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+  //stores web token in browser to keep users logged in
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
 
   onRegister(register) {
@@ -61,37 +59,56 @@ export class MainView extends React.Component {
     });
   }
 
+  getMovies(token) {
+    axios.get('https://starwarscentral.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      // Assign the result to the state
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
-
-    //If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-    //if user is not registered, register view is rendered
-    if (!register)
-      return (
-        <RegistrationView onRegister={(register) => this.onRegister(register)} />
-      );
+    const { movies, user } = this.state;
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-              <Col md={8}>
-                <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
-              </Col>
-            )
-          : movies.map(movie => (
-              <Col md={3}>
-                <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-              </Col>
-            ))
-        }
-      </Row>
+      <Router>
         <NavView user={user} />
+        <Row className="justify-content-md-center">
+          <div className="main-view">
+            <Col md={8}>
+              <Route exact path="/" render={() => {
+                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                }
+              }/>
+            </Col>
+            <Route path="/register" render={() => <RegistrationView />} />
+            <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
+            <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
+            <Route path="/genres/:name" render={({match}) => 
+              <GenreView 
+                genre={movies.find((m) => m.Genre.Name === match.params.name).Genre}
+                movies={movies.filter((m) => m.Genre.Name === match.params.name)} 
+              />
+            }/>
+            <Route path="/directors/:name" render={({ match }) => {
+              if (!movies) return <div className="main-view"/>;
+              return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}
+              } />
+            <Route exact path='/users/:username' render={() => <ProfileView movies={movies} />} />
+            <Route path='/users/:username/update' render={() => <UpdateProfile movies={movies} />} />
+          </div>
+        </Row>
+      </Router>
     );
   }
 }

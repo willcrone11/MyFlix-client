@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import './movie-view.scss';
 
@@ -12,6 +14,23 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  addFaveMovie(movie) {
+    const token = localStorage.getItem('token');
+    const userName = localStorage.getItem('user');
+
+    if (confirm('Add to list of Favorites?')) return (
+    axios({
+        method: 'post',
+        url: `https://starwarscentral.herokuapp.com/users/${userName}/movies/${movie._id}`,
+        headers: { Authorization: `Bearer ${token}` }
+    })
+            .then((response) => {
+                console.log(response);
+        alert('You have added this movie to your list of Favorites.');
+    })
+)
+}
 
   render() {
     const { movie } = this.props;
