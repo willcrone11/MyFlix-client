@@ -51641,10 +51641,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         _this2.setState({
-          username: response.data.username,
-          password: response.data.password,
-          email: response.data.email,
-          birthday: response.data.birthday,
+          username: response.data.Username,
+          password: response.data.Password,
+          email: response.data.Email,
+          birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies
         });
       }).catch(function (error) {
@@ -51708,7 +51708,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var FaveMovies = movies.filter(function (movie) {
         return userMovies.includes(movie._id);
       });
-      var userName = localStorage.getItem('user');
       return _react.default.createElement(_Container.default, {
         className: "profile-view"
       }, _react.default.createElement(_reactBootstrap.Row, {
@@ -51719,7 +51718,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profile-card"
       }, _react.default.createElement(_Card.default.Text, null, _react.default.createElement("span", {
         className: "label"
-      }, "Username: "), userName, _react.default.createElement("br", null), _react.default.createElement("span", {
+      }, "Username: "), this.state.username, _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "label"
       }, "Email: "), this.state.email, _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "label"
@@ -51752,14 +51751,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           variant: "top",
           src: movie.ImagePath
         }), _react.default.createElement(_Card.default.Header, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
-          as: "h1"
+          as: "h3"
         }, movie.Title))), _react.default.createElement(_reactRouterDom.Link, {
           to: "/movies/".concat(movie._id)
         }, _react.default.createElement(_reactBootstrap.Button, {
-          variant: "info",
+          variant: "primary",
           className: "card-button profile-details-btn"
         }, "Details")), _react.default.createElement(_reactBootstrap.Button, {
-          variant: "secondary",
+          variant: "danger",
           onClick: function onClick() {
             return _this5.deleteFaveMovie(movie);
           }
