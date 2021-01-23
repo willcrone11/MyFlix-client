@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
+import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
 import './registration-view.scss';
@@ -9,13 +11,24 @@ export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [birthday, setBirthday] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegister('test');
+    axios.post('https://starwarscentral.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+    })
+    .catch(e => {
+      console.log('error registering the user')
+    });
   };
 
   return (
@@ -50,15 +63,6 @@ export function RegistrationView(props) {
             placeholder='Enter Password'
           />
         </Form.Group>
-        <Form.Group controlId='formBasicConfirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder='Confirm Password'
-          />
-        </Form.Group>
         <Form.Group controlId='formBasicBirthday'>
           <Form.Label>Birthday</Form.Label>
           <Form.Control
@@ -68,11 +72,16 @@ export function RegistrationView(props) {
             placeholder='Enter Birthday'
           />
         </Form.Group>
-
         <Button onClick={handleSubmit} variant='primary' type='submit'>
           Submit
         </Button>
       </Form>
+      <div className="no-account">
+        <span>Already Have an Account?</span>
+          <Link to={`/`}><br/>
+            <Button variant="link">Login Here</Button>
+          </Link>
+      </div>
     </React.Fragment>
   );
 }
