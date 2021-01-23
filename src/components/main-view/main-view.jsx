@@ -10,6 +10,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { NavView } from '../nav-view/nav-view';
 
 export class MainView extends React.Component {
 
@@ -90,6 +91,7 @@ export class MainView extends React.Component {
             ))
         }
       </Row>
+        <NavView user={user} />
     );
   }
 }
