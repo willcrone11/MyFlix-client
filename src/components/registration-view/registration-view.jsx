@@ -34,7 +34,7 @@ export function RegistrationView(props) {
   return (
     <React.Fragment>
       <Form className='form-register'>
-        <h1 className='text-primary'>Welcome to myFlix!</h1>
+        <h1 className='text-warning'>Welcome to Star Wars Central!</h1>
         <p className='mb-5'>Please register to continue.</p>
         <Form.Group controlId='formBasicText'>
           <Form.Label>Username</Form.Label>

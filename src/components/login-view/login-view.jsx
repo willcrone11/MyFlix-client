@@ -31,6 +31,7 @@ export function LoginView(props) {
     <React.Fragment>
       <div className="container">
         <Form className='form-login'>
+          <h1 className='text-warning'>Welcome to Star Wars Central!</h1>
           <p className='mb-5'>Please login to continue.</p>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Username</Form.Label>
