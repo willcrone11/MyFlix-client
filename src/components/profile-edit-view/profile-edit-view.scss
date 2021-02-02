@@ -1,5 +1,6 @@
 .updateProfile-view {
   margin: 0 auto;
+  color: white;
 }
 
 .update-form {
@@ -46,6 +47,7 @@
     width: 20%;
     margin: 1rem auto;
   }
+  
   .updateProfile-view input#formBasicPassword.form-control,
   .updateProfile-view input#formBasicUsername.form-control,
   .updateProfile-view input#formBasicEmail.form-control,
