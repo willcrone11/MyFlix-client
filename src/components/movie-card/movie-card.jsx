@@ -15,13 +15,12 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card style={{ width: '16rem', height: '60rem' }} className="movie-card">
+      <Card style={{ width: '14rem', height: '30rem' }} className="movie-card">
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
+            <Link to={`/movies/${movie._id}`}>
+            <Button  variant="link">Open</Button>
           </Link>
         </Card.Body>
       </Card>
