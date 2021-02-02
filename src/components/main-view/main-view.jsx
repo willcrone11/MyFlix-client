@@ -1,13 +1,16 @@
 import React from 'react';
 //used to send client requests; hooks frontend code up with API
 import axios from 'axios';
-import { Row, Col, Button} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import './main-view.scss';
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import { MovieCard } from '../movie-card/movie-card';
+// #0
+import { setMovies, setUser, setUserToken, setFavoriteMovies } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -33,20 +36,16 @@ export class MainView extends React.Component {
   // One of the "hooks" available in a React Component
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
+      this.props.setUser(localStorage.getItem('user'));
+      this.getUserData(accessToken, user);
     }
   }
 
   //When a user successfully logs in, this function updates the `user` property in state to that particular user
   onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
+    this.props.setUser(authData.user.Username);
   //stores web token in browser to keep users logged in
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -64,10 +63,24 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
+      // #1
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  getUserData(userToken, user) {
+    axios.get(`https://starwarscentral.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${userToken}` }
+    })
+    .then((response) => {
+      this.getMovies(userToken);
+      let userData = response.data;
+      this.props.setUser(userData.Username);
+      this.props.setUserToken(userToken);
+      this.props.setFavoriteMovies(userData.FavoriteMovies);
     })
     .catch(function (error) {
       console.log(error);
@@ -75,7 +88,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    // #2
+    const { movies, user } = this.props;
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
@@ -83,16 +97,15 @@ export class MainView extends React.Component {
     return (
       <Router>
         <NavView user={user} />
-        <Row className="justify-content-md-center">
           <div className="main-view">
-            <Col md={8}>
-              <Route exact path="/" render={() => {
-                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-                }
-              }/>
-            </Col>
+            <Route exact path="/" render={() => {
+              if (!user) 
+              return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              return <MoviesList movies={movies}/>;
+              }
+            }/>
+            
             <Route path="/register" render={() => <RegistrationView />} />
-            <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
             <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
             <Route path="/genres/:name" render={({match}) => 
               <GenreView 
@@ -107,8 +120,20 @@ export class MainView extends React.Component {
             <Route exact path='/users/:username' render={() => <ProfileView movies={movies} />} />
             <Route path='/users/:username/update' render={() => <UpdateProfile movies={movies} />} />
           </div>
-        </Row>
       </Router>
     );
   }
 }
+
+// #3
+let mapStateToProps = state => {
+  return { 
+    movies: state.movies,
+    user: state.user,
+    userToken: state.userToken,
+    favoriteMovies: state.favoriteMovies 
+  }
+}
+
+// #4
+export default connect(mapStateToProps, { setMovies, setUser, setUserToken, setFavoriteMovies } )(MainView);

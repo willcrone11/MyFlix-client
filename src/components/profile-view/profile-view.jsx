@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import { Row } from 'react-bootstrap';
@@ -9,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 
 import './profile-view.scss';
+import { setUser, setUserToken, setFavoriteMovies } from '../../actions/actions';
 
 export class ProfileView extends React.Component {
 
@@ -98,6 +100,7 @@ export class ProfileView extends React.Component {
 
       <Container className="profile-view">
         <Row className='profile-row'>
+          <div className="profile-container">
 
           <h2>User Information</h2>
 
@@ -126,16 +129,17 @@ export class ProfileView extends React.Component {
             </Link>
 
             <Button variant='danger' onClick={() => this.deregisterUser()} className='delete-user-button'>Delete Profile</Button>
-
+            <br/>
             <Link to='/'>
               <Button variant='light' className='home-button'>Home</Button>
             </Link>
+          </div>
           </div>
         </Row>
 
         <Row className='faveMovies'>
 
-          <h2>Favorite Movies</h2>
+          <h2 className="favMoviesHeader">Favorite Movies</h2>
 
           <div className='faveMovies-container row'>
             {FaveMovies.map(movie => {
@@ -177,3 +181,13 @@ ProfileView.propTypes = {
     FavoriteMovies: PropTypes.array
     })
 };
+
+let mapStateToProps = state => {
+  return { 
+    user: state.user,
+    userToken: state.userToken,
+    favoriteMovies: state.favoriteMovies
+  }
+}
+
+export default connect(mapStateToProps, { setUser, setUserToken, setFavoriteMovies })(ProfileView);
