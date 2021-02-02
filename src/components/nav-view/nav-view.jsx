@@ -24,8 +24,8 @@ export class NavView extends React.Component {
     if (!user) return null;
 
     return( 
-      <Navbar collapseOnSelect expand="lg" sticky="top" bg="dark" variant="dark">
-        <Navbar.Brand href="/">Star Wars Central</Navbar.Brand>
+      <Navbar collapseOnSelect expand="lg" sticky="top" bg="light" variant="light" className="navbar">
+        <Navbar.Brand id="logo-text" href="/"><img src="https://logodownload.org/wp-content/uploads/2015/12/star-wars-logo.png" id="logo"></img> central</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -34,7 +34,7 @@ export class NavView extends React.Component {
             <Link to={'/users/:Username'}>
               <Button 
                 className="profile-button" 
-                variant="light"
+                variant="dark"
               >
                 Profile
               </Button>

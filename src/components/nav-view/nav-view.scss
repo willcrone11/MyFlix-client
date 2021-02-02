@@ -1,3 +1,17 @@
 .navbar {
   margin-bottom: 20px;
 }
+
+.profile-button, .logout-button {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+#logo {
+  max-width: 300px;
+}
+
+#logo-text {
+  font-family: monospace;
+  font-size: 25px;
+}
