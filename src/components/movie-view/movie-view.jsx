@@ -15,6 +15,10 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   addFaveMovie(movie) {
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('user');
