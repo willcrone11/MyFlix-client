@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
-import Container from 'react-bootstrap/Container';
-import { Row, Col } from 'react-bootstrap';
 
 import MainView from './components/main-view/main-view';
 import moviesApp from './reducers/reducers';
@@ -19,16 +17,10 @@ class MyFlixApplication extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Container className="container">
-          <Row className="justify-content-md-center">
-            <Col>
-              <MainView />
-              <div id='stars'></div>
-              <div id='stars2'></div>
-              <div id='stars3'></div>
-            </Col>
-          </Row>
-        </Container>
+        <MainView />
+          <div id='stars'></div>
+          <div id='stars2'></div>
+          <div id='stars3'></div>
       </Provider>
     );
   }
