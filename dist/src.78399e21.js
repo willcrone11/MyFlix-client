@@ -55073,17 +55073,13 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return _react.default.createElement(_reactRedux.Provider, {
         store: store
-      }, _react.default.createElement(_Container.default, {
-        className: "container"
-      }, _react.default.createElement(_reactBootstrap.Row, {
-        className: "justify-content-md-center"
-      }, _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement(_mainView.default, null), _react.default.createElement("div", {
+      }, _react.default.createElement(_mainView.default, null), _react.default.createElement("div", {
         id: "stars"
       }), _react.default.createElement("div", {
         id: "stars2"
       }), _react.default.createElement("div", {
         id: "stars3"
-      })))));
+      }));
     }
   }]);
 
@@ -55122,7 +55118,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53376" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50162" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

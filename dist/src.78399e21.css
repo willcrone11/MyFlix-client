@@ -1,5 +1,7 @@
 .main-view {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  background-color: #000000;
+  padding-bottom: 400px;
 }
 .movie-card {
   margin-bottom: 15px;
@@ -9,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 300px;
+  padding-bottom: 300px;
+  padding-top: 20px;
 }
 .form-login {
   min-height: 100vh;
@@ -38,6 +41,8 @@
   padding-left: 15px;
   padding-right: 15px;
   color: #ffffff;
+  padding-bottom: 500px;
+  padding-top: 100px;
 }
 .genre-view {
   position: static;
@@ -45,15 +50,16 @@
   padding-left: 15px;
   padding-right: 15px;
   color: #ffffff;
+  padding-bottom: 500px;
+  padding-top: 150px;
 }
 .profile-view {
   text-align: center;
-  margin-top: 0;
+  margin-top: 0px;
 }
 
 .profile-row {
   margin: 0 auto;
-  margin-top: 2rem;
   margin-bottom: 4rem;
   display: block;
   color: #ffffff;
@@ -155,10 +161,6 @@ div.faveMovies-container {
     margin: 0 auto;
   }
 }
-.navbar {
-  margin-bottom: 20px;
-}
-
 .profile-button, .logout-button {
   margin-right: 10px;
   margin-bottom: 5px;
