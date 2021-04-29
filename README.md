@@ -2,10 +2,12 @@
 This is the client side for Star Wars Central, an app that allows users to view information about their favorite Star Wars Films, including synopsis and director and genre information. Users can also create a profile and save their favorite films.
 
 ## API
-Server-side API created by me, open access to anyone to use. API hosted with heroku, can be found at [myFlix DB](www.starwarscentral.herokuapp.com)
+Server-side API created by me, open access to anyone to use. API hosted with heroku.
 
 ## Deployment
 Automatic deployment initiated on Netlify, when an update it commited and pushed to the main branch, a new deployment will run.
+
+### [The application is deployed here.](https://starwarscentral.netlify.app/)
 
 ## User Stories Used for Development
 
