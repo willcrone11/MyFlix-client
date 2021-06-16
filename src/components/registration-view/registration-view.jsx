@@ -34,10 +34,16 @@ export function RegistrationView(props) {
   return (
     <React.Fragment>
       <Form className='form-register'>
-        <h1 className='text-warning'>Welcome to Star Wars Central!</h1>
-        <p className='mb-5'>Please register to continue.</p>
+        <h1 className='text-warning'>
+          Welcome to Star Wars Central!
+        </h1>
+        <p className='mb-5'>
+          Please register to continue.
+        </p>
         <Form.Group controlId='formBasicText'>
-          <Form.Label>Username</Form.Label>
+          <Form.Label>
+            Username
+          </Form.Label>
           <Form.Control
             type='text'
             value={username}
@@ -46,7 +52,9 @@ export function RegistrationView(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicEmail'>
-          <Form.Label>Email</Form.Label>
+          <Form.Label>
+            Email
+          </Form.Label>
           <Form.Control
             type='email'
             value={email}
@@ -55,7 +63,9 @@ export function RegistrationView(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
+          <Form.Label>
+            Password
+          </Form.Label>
           <Form.Control
             type='password'
             value={password}
@@ -64,7 +74,9 @@ export function RegistrationView(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicBirthday'>
-          <Form.Label>Birthday</Form.Label>
+          <Form.Label>
+            Birthday
+          </Form.Label>
           <Form.Control
             type='date'
             value={birthday}
@@ -79,7 +91,9 @@ export function RegistrationView(props) {
       <div className="no-account">
         <span>Already Have an Account?</span>
           <Link to={`/`}><br/>
-            <Button variant="link">Login Here</Button>
+            <Button variant="link">
+              Login Here
+            </Button>
           </Link>
       </div>
     </React.Fragment>

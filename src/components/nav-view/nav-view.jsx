@@ -24,10 +24,24 @@ export class NavView extends React.Component {
     if (!user) return null;
 
     return( 
-      <Navbar collapseOnSelect expand="lg" sticky="top" bg="light" variant="light" className="navbar">
-        <Navbar.Brand id="logo-text" href="/"><img src="https://logodownload.org/wp-content/uploads/2015/12/star-wars-logo.png" id="logo"></img> central</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+      <Navbar 
+        collapseOnSelect 
+        expand="lg" 
+        sticky="top" 
+        bg="light" 
+        variant="light" 
+        className="navbar"
+      >
+        <Navbar.Brand 
+          id="logo-text" 
+          href="/"
+        >
+          <img 
+            src="https://logodownload.org/wp-content/uploads/2015/12/star-wars-logo.png" 
+            id="logo">
+          </img> 
+          central
+        </Navbar.Brand>
           <Nav className="mr-auto">
           </Nav>
           <Nav>
@@ -51,7 +65,7 @@ export class NavView extends React.Component {
               </Button>
             </Link>
           </Nav>
-        </Navbar.Collapse>
+        
       </Navbar>
     );
   }

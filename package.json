@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
     "main": "^1000.0.1",
     "parcel": "^2.0.0-nightly.511",
     "parcel-bundler": "^1.12.4",

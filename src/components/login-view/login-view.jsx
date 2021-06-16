@@ -29,12 +29,18 @@ export function LoginView(props) {
 
   return (
     <React.Fragment>
-      <div className="container">
+      <div>
         <Form className='form-login'>
-          <h1 className='text-warning'>Welcome to Star Wars Central!</h1>
-          <p className='mb-5'>Please login to continue.</p>
+          <h1 className='text-warning'>
+            Welcome to Star Wars Central!
+          </h1>
+          <p className='mb-5'>
+            Please login to continue.
+          </p>
           <Form.Group controlId='formBasicEmail'>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>
+              Username
+            </Form.Label>
             <Form.Control
               type='text'
               value={username}
@@ -43,7 +49,9 @@ export function LoginView(props) {
             />
           </Form.Group>
           <Form.Group controlId='formBasicPassword'>
-            <Form.Label>Password</Form.Label>
+            <Form.Label>
+              Password
+            </Form.Label>
             <Form.Control
               type='password'
               value={password}
@@ -52,14 +60,23 @@ export function LoginView(props) {
               placeholder='Enter Password'
             />
           </Form.Group>
-          <Button onClick={handleSubmit} variant='primary' type='submit'>
+          <Button 
+            onClick={handleSubmit} 
+            variant='primary' 
+            type='submit'
+          >
             Submit
           </Button>
         </Form>
         <div className="no-account">
-          <span>Don't Have an Account?</span><br/>
+          <span>
+            Don't Have an Account?
+          </span>
+          <br/>
             <Link to={`/register`}>
-              <Button variant="link">Register Here</Button>
+              <Button variant="link">
+                Register Here
+              </Button>
             </Link>
         </div>
       </div>

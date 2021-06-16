@@ -24,27 +24,45 @@ export class DirectorView extends React.Component {
     return (
       <div className="director-view">
         <div className="director-name">
-          <span className="label">Name: </span>
-          <span className="value">{director.Name}</span>
+          <span className="label">
+            Name: 
+          </span>
+          <span className="value">
+            {director.Name}
+          </span>
         </div>
         <br />
         <div className="director-bio">
-          <span className="label">Biography: </span>
-          <span className="value">{director.Bio}</span>
+          <span className="label">
+            Biography: 
+          </span>
+          <span className="value">
+            {director.Bio}
+          </span>
         </div>
         <br />
         <div className="director-birth">
-          <span className="label">Birth: </span>
-          <span className="value">{director.Birth}</span>
+          <span className="label">
+            Birth: 
+          </span>
+          <span className="value">
+            {director.Birth}
+          </span>
         </div>
         <br />
         <div className="director-death">
-          <span className="label">Death: </span>
-          <span className="value">{director.Death}</span>
+          <span className="label">
+            Death: 
+          </span>
+          <span className="value">
+            {director.Death}
+          </span>
         </div>
         <br />
         <Link to={'/'}>
-          <Button variant="primary">Back</Button>
+          <Button variant="primary">
+            Back
+          </Button>
         </Link>
       </div>
     );

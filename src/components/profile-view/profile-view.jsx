@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 
 import Container from 'react-bootstrap/Container';
 import { Row } from 'react-bootstrap';
@@ -101,13 +102,9 @@ export class ProfileView extends React.Component {
       <Container className="profile-view">
         <Row className='profile-row'>
           <div className="profile-container">
-
           <h2>User Information</h2>
-
           <Card className='profileCard'>
-
             <Card.Body className='profile-card'>
-
               <Card.Text>
                 <span className="label">Username: </span>
                   {this.state.username}
@@ -116,18 +113,14 @@ export class ProfileView extends React.Component {
                   {this.state.email}
                 <br />
                 <span className='label'>Birthday: </span>
-                  {this.state.birthday}
+                  {dayjs(this.state.birthday).format('MMMM DD, YYYY')}
               </Card.Text>
-
             </Card.Body>
-
           </Card>
-
           <div>
             <Link to='/users/:username/update'>
               <Button variant='success' className='update-button'>Update Profile</Button>
             </Link>
-
             <Button variant='danger' onClick={() => this.deregisterUser()} className='delete-user-button'>Delete Profile</Button>
             <br/>
             <Link to='/'>
@@ -136,37 +129,46 @@ export class ProfileView extends React.Component {
           </div>
           </div>
         </Row>
-
         <Row className='faveMovies'>
-
           <h2 className="favMoviesHeader">Favorite Movies</h2>
-
           <div className='faveMovies-container row'>
             {FaveMovies.map(movie => {
               return (
-
-                <Card key={movie._id} border='dark' className='faveMovies_card'>
-
-                  <Card.Img variant='top' src={movie.ImagePath} />
+                <Card 
+                  key={movie._id} 
+                  border='dark' 
+                  className='faveMovies_card'
+                >
+                  <Card.Img 
+                    variant='top' 
+                    src={movie.ImagePath} 
+                  />
                   <Card.Header>
                     <Card.Body>
-                      <Card.Title as='h3'>{movie.Title}</Card.Title>
+                      <Card.Title as='h3'>
+                        {movie.Title}
+                      </Card.Title>
                     </Card.Body>
                   </Card.Header>
-
                   <Link to={`/movies/${movie._id}`}>
-                    <Button variant='primary' className='card-button profile-details-btn'>Details</Button>
+                    <Button 
+                      variant='primary' 
+                      className='card-button profile-details-btn'
+                    >
+                      Details
+                    </Button>
                   </Link>
-
-                  <Button variant='danger' onClick={() => this.deleteFaveMovie(movie)}>Remove Movie</Button>
-
+                  <Button 
+                    variant='danger' 
+                    onClick={() => this.deleteFaveMovie(movie)}
+                  >
+                    Remove Movie
+                  </Button>
                 </Card>
-
               )
             })}
           </div>
         </Row>
-
       </Container>
     );
   }

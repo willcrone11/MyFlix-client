@@ -44,30 +44,54 @@ export class MovieView extends React.Component {
     return (
       <div className="movie-view">
         <Card style={{ width: '18rem' }}>
-          <Card.Img className="movie-poster" src={movie.ImagePath} />
+          <Card.Img 
+            className="movie-poster" 
+            src={movie.ImagePath} 
+          />
           <Card.Body>
             <div className="movie-title">
-              <Card.Title>Title: {movie.Title}</Card.Title>
+              <Card.Title>
+                Title: {movie.Title}
+              </Card.Title>
             </div>
             <Card.Text>
-              <span className="label">Description: </span>
-              <span className="value">{movie.Description}</span>
+              <span className="label">
+                Description: 
+              </span>
+              <span className="value">
+                {movie.Description}
+              </span>
             </Card.Text>
             <Card.Text>
-              <span className="label">Genre:</span>
+              <span className="label">
+                Genre:
+              </span>
               <Link to={`/genres/${movie.Genre.Name}`}>
-                <Button variant="link">{movie.Genre.Name}</Button>
+                <Button variant="link">
+                  {movie.Genre.Name}
+                </Button>
               </Link>
             </Card.Text>
             <Card.Text>
-              <span className="label">Director:</span>
+              <span className="label">
+                Director:
+              </span>
               <Link to={`/directors/${movie.Director.Name}`}>
-                <Button variant="link">{movie.Director.Name}</Button>
+                <Button variant="link">
+                  {movie.Director.Name}
+                </Button>
               </Link>
             </Card.Text>
-            <Button variant='warning' className='add-btn' onClick={() => this.addFaveMovie(movie)}>Add to Favorite Movies</Button>
+            <Button 
+              variant='warning' 
+              className='add-btn' 
+              onClick={() => this.addFaveMovie(movie)}>
+                Add to Favorite Movies
+              </Button>
             <Link to={'/'}>
-              <Button variant="primary">Back</Button>
+              <Button variant="primary">
+                Back
+              </Button>
             </Link>
           </Card.Body>
         </Card>

@@ -54,64 +54,102 @@ export function UpdateProfile(props) {
   return (
 
     <Container className='updateProfile-view'>
-
       <h2>Update Profile</h2>
-
       <Form noValidate validated={validated} className='update-form'>
-
         <Form.Group controlId='formBasicUsername'>
-
-          <Form.Label>Change Username:</Form.Label>
-          <Form.Control required minLength='5' type='text' value={username} placeholder='Change username' onChange={e => updateUsername(e.target.value)} />
-          <Form.Text className='text-muted'>Must be alphanumeric and at least 5 characters</Form.Text>
-          <Form.Control.Feedback>&#10003;</Form.Control.Feedback>
+          <Form.Label>
+            Change Username:
+          </Form.Label>
+          <Form.Control 
+            required minLength='5' 
+            type='text' 
+            value={username} 
+            placeholder='Change username' 
+            onChange={e => updateUsername(e.target.value)} 
+          />
+          <Form.Text className='text-muted'>
+            Must be alphanumeric and at least 5 characters
+          </Form.Text>
+          <Form.Control.Feedback>
+            &#10003;
+          </Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
             Please choose a username. Must be alphanumeric and at least 5 characters.
           </Form.Control.Feedback>
-
         </Form.Group>
-
         <Form.Group controlId='formBasicPassword'>
-
-          <Form.Label>Change Password:</Form.Label>
-          <Form.Control required minLength='5' type='password' value={password} placeholder='Change password' onChange={e => updatePassword(e.target.value)} />
-          <Form.Control.Feedback>&#10003;</Form.Control.Feedback>
+          <Form.Label>
+            Change Password:
+          </Form.Label>
+          <Form.Control 
+            required minLength='5' 
+            type='password' 
+            value={password} 
+            placeholder='Change password' 
+            onChange={e => updatePassword(e.target.value)} 
+          />
+          <Form.Control.Feedback>
+            &#10003;
+          </Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
             Please choose a password. Must be alphanumeric and at least 5 characters.
           </Form.Control.Feedback>
-          <Form.Text className='text-muted'>Must be alphanumeric and at least 5 characters</Form.Text>
-
+          <Form.Text className='text-muted'>
+            Must be alphanumeric and at least 5 characters
+          </Form.Text>
         </Form.Group>
-
         <Form.Group controlId='formBasicEmail'>
-
-          <Form.Label>Change Email:</Form.Label>
-          <Form.Control required type='email' value={email} placeholder='user@email.com' onChange={e => updateEmail(e.target.value)} />
-          <Form.Control.Feedback>&#10003;</Form.Control.Feedback>
+          <Form.Label>
+            Change Email:
+          </Form.Label>
+          <Form.Control 
+            required type='email' 
+            value={email} 
+            placeholder='user@email.com' 
+            onChange={e => updateEmail(e.target.value)} 
+          />
+          <Form.Control.Feedback>
+            &#10003;
+          </Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
             Please enter a valid email.
           </Form.Control.Feedback>
-
         </Form.Group>
-
         <Form.Group controlId='formBasicBirthday'>
-
-          <Form.Label>Change Birthday:</Form.Label>
-          <Form.Control required type='date' value={birthday} placeholder='DD-MM-YYYY' onChange={e => updateBirthday(e.target.value)} />
-          <Form.Control.Feedback>&#10003;</Form.Control.Feedback>
+          <Form.Label>
+            Change Birthday:
+          </Form.Label>
+          <Form.Control 
+            required 
+            type='date' 
+            value={birthday} 
+            placeholder='DD-MM-YYYY' 
+            onChange={e => updateBirthday(e.target.value)} 
+          />
+          <Form.Control.Feedback>
+            &#10003;
+          </Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
             Please enter a valid birthday.
           </Form.Control.Feedback>
-
         </Form.Group>
-
       </Form>
-
-      <Button variant='success' className='update-btn' type='submit' onClick={handleUpdate}>Update</Button>
+      <Button 
+        variant='success' 
+        className='update-btn' 
+        type='submit' 
+        onClick={handleUpdate}
+      >
+        Update
+      </Button>
       <Link to='/users/username'>
-        <Button variant='danger' className='updateHome-btn'>Cancel</Button>
+        <Button 
+          variant='danger' 
+          className='updateHome-btn'
+        >
+          Cancel
+        </Button>
       </Link>
-
     </Container>
   )
 }
