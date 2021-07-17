@@ -53970,13 +53970,13 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "director-name"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Name:"), _react.default.createElement("span", {
+      }, "Name:"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "value"
       }, director.Name)), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "director-bio"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Biography:"), _react.default.createElement("span", {
+      }, "Biography:"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "value"
       }, director.Bio)), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "director-birth"
@@ -54077,13 +54077,13 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
         className: "genre-name"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Name:"), _react.default.createElement("span", {
+      }, "Name:"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "value"
       }, genre.Name)), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "genre-description"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Description:"), _react.default.createElement("span", {
+      }, "Description:"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("span", {
         className: "value"
       }, genre.Description)), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
@@ -55108,7 +55108,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57675" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62292" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

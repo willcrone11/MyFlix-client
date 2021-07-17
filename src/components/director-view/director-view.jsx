@@ -27,6 +27,7 @@ export class DirectorView extends React.Component {
           <span className="label">
             Name: 
           </span>
+          <br/><br/>
           <span className="value">
             {director.Name}
           </span>
@@ -36,6 +37,7 @@ export class DirectorView extends React.Component {
           <span className="label">
             Biography: 
           </span>
+          <br/><br/>
           <span className="value">
             {director.Bio}
           </span>
